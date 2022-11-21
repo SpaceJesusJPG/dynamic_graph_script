@@ -14,7 +14,7 @@ def get_file_name(short_name, data_dir):
                 lambda x: x is not None, map(lambda x: re.search(pattern, x), file_list)
             )
             str_match_list = sorted(list(map(lambda x: x.string, match_list)))
-            return data_dir, str_match_list[-1], short_name
+            return data_dir, str_match_list[-1]
         except AttributeError:
             raise FileNotFoundError("Файл не был найден")
     else:
@@ -37,13 +37,7 @@ def dialog_window():
 
     root = Tk()
     root.title("Конфигурация")
-    root.geometry("450x143")
-    btn_text = Label(text="Выберите название датчика")
-    btn_text.pack(anchor=W, padx=6)
-    name = StringVar()
-    name.set("JJI")
-    options = OptionMenu(root, name, "JJI", "JJY", "NPM", "NWC")
-    options.pack(anchor=W, padx=6)
+    root.geometry("450x100")
     data_dir = StringVar()
     dir_btn = ttk.Button(text="Выберите папку с файлами", command=get_directory)
     dir_btn.pack(anchor=W, padx=6)
@@ -53,11 +47,11 @@ def dialog_window():
     btn.pack(fill=X, padx=6, pady=6)
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.mainloop()
-    return name.get().upper(), data_dir.get()
+    return data_dir.get()
 
 
-def configuration(data_dir=None, short_name=None):
+def configuration(data_dir=None, short_name="JJI"):
     if data_dir is None:
-        short_name, data_dir = dialog_window()
+        data_dir = dialog_window()
         return get_file_name(short_name, data_dir)
     return get_file_name(short_name, data_dir)
