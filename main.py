@@ -182,6 +182,6 @@ next_button.on_clicked(full_screen_button)
 ax.legend(ncol=2, title='UltraMSK', fontsize = 15, title_fontsize = '15')
 ax.grid(which="major", ls="-", lw=0.5, color="#373737")
 
-anim = animation.FuncAnimation(fig, loopclass.loop, interval=200)
+anim = animation.FuncAnimation(fig, loopclass.loop, interval=20000)
 
 plt.show()
