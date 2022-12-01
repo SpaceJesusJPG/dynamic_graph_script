@@ -14,7 +14,7 @@ def get_file_name(short_name, data_dir):
                 lambda x: x is not None, map(lambda x: re.search(pattern, x), file_list)
             )
             str_match_list = sorted(list(map(lambda x: x.string, match_list)))
-            return data_dir, str_match_list[-1]
+            return str_match_list[-1]
         except AttributeError:
             raise FileNotFoundError("Файл не был найден")
     else:
